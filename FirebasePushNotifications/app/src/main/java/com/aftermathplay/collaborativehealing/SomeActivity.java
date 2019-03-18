@@ -1,4 +1,4 @@
-package com.tabian.firebasepushnotifications;
+package com.aftermathplay.collaborativehealing;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

@@ -1,14 +1,16 @@
-package com.tabian.firebasepushnotifications;
+package com.aftermathplay.notification;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONException;
@@ -22,6 +24,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     private static final String TAG = "FirebaseMessagingServic";
 
     public FirebaseMessagingService() {
+        Log.d(TAG, "FirebaseMessagingService: "+ FirebaseMessaging.INSTANCE_ID_SCOPE);
     }
 
     @Override
@@ -39,7 +42,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             }
         }
 
-        // Check if message contains a notification payload.
+        // Check if message contains a ®notification payload.
         if (remoteMessage.getNotification() != null) {
             String title = remoteMessage.getNotification().getTitle(); //get title
             String message = remoteMessage.getNotification().getBody(); //get message
@@ -82,11 +85,19 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent);
+                .setContentIntent(pendingIntent)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(Bitmap.createBitmap(256,256, Bitmap.Config.RGB_565)));
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+    }
+
+    @Override
+    public void onNewToken(String s) {
+        Log.d(TAG, "Refreshed token: " + s);
+        super.onNewToken(s);
     }
 }
