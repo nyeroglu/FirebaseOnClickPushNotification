@@ -1,5 +1,7 @@
 package com.aftermathplay.notification;
 
+import android.app.ActivityManager;
+import android.app.IntentService;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -7,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Parcelable;
+import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -15,6 +19,9 @@ import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by User on 2/20/2017.
@@ -34,6 +41,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             Log.d(TAG, "Message data payload: " + remoteMessage.getData());
             try {
                 JSONObject data = new JSONObject(remoteMessage.getData());
+
+                this.sendNotification(data.toString(), data.getString("title"), data.getString("body"), data.getString("click_action"));
+
                 String jsonMessage = data.getString("extra_information");
                 Log.d(TAG, "onMessageReceived: \n" +
                         "Extra Information: " + jsonMessage);
@@ -51,8 +61,19 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             Log.d(TAG, "Message Notification Title: " + title);
             Log.d(TAG, "Message Notification Body: " + message);
             Log.d(TAG, "Message Notification click_action: " + click_action);
+            JSONObject data = new JSONObject(remoteMessage.getData());
+            JSONObject newdata = new JSONObject();
 
-            sendNotification(title, message,click_action);
+
+            try {
+                newdata.put("notificationParameters",data.getString("notificationParameters"));
+                newdata.put("notificationType",data.get("notificationType"));
+                newdata.put("notificationAction",data.get("notificationAction"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            sendNotification(newdata.toString(),title, message,click_action);
         }
     }
 
@@ -61,8 +82,10 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-    private void sendNotification(String title,String messageBody, String click_action) {
+    private void sendNotification(String notification, String title, String messageBody, String click_action) {
         Intent intent;
+
+
         if(click_action.equals("SOMEACTIVITY")){
             intent = new Intent(this, SomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -71,23 +94,28 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }else{
-            intent = new Intent(this, MainActivity.class);
+            intent = new Intent(this, SendUnity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        intent.putExtra("notification", notification);
+
+        PendingIntent pendingIntentService = PendingIntent.getService(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
+
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.app_logo)
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
-                .setContentIntent(pendingIntent)
+                .setContentIntent(pendingIntentService)
                 .setStyle(new NotificationCompat.BigPictureStyle()
-                        .bigPicture(Bitmap.createBitmap(256,256, Bitmap.Config.RGB_565)));
+                .bigPicture(Bitmap.createBitmap(25,256, Bitmap.Config.RGB_565))
+                );
 
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);

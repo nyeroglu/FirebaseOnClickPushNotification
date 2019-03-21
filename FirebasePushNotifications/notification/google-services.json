@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "1062624806509",
+    "firebase_url": "https://agartha-5955f.firebaseio.com",
+    "project_id": "agartha-5955f",
+    "storage_bucket": "agartha-5955f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062624806509:android:8b7f6774ae36851c",
+        "android_client_info": {
+          "package_name": "com.aftermathplay.collaborativehealing"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062624806509-4dgdshq1db0b8fea5igq8at5v48qgb6g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aftermathplay.collaborativehealing",
+            "certificate_hash": "c95ab13c955a8c05686de253128b47579e5e9571"
+          }
+        },
+        {
+          "client_id": "1062624806509-unu32ofcfmuaqgi278b5pb2n1kohrn9p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmphAcADPcVWk3Xe1la_8Cy5E1g82rNrw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062624806509-unu32ofcfmuaqgi278b5pb2n1kohrn9p.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1062624806509-bft7d02ahfldk7t1c1t1afm5ld6uauq0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.aftermathplay.collaborativehealing",
+                "app_store_id": "1439458330"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

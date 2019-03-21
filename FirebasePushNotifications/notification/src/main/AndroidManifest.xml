@@ -11,8 +11,7 @@ package="com.aftermathplay.notification">
     <activity android:name=".MainActivity">
         <intent-filter>
             <action android:name="android.intent.action.MAIN"/>
-
-            <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.DEFAULT"/>
         </intent-filter>
         <intent-filter>
             <action android:name="MAINACTIVITY"></action>
@@ -26,7 +25,9 @@ package="com.aftermathplay.notification">
             <category android:name="android.intent.category.DEFAULT"></category>
         </intent-filter>
     </activity>
-
+    <service
+        android:name=".SendUnity"
+        android:exported="false"/>
     <service
         android:name=".FirebaseMessagingService">
         <intent-filter>
