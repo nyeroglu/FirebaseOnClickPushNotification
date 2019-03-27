@@ -3,6 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/FirebaseOnClickPushNotification.iml" filepath="$PROJECT_DIR$/.idea/FirebaseOnClickPushNotification.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-513988989/FirebasePushNotifications.iml" filepath="$PROJECT_DIR$/.idea/modules/-513988989/FirebasePushNotifications.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/161940629/app.iml" filepath="$PROJECT_DIR$/.idea/modules/161940629/app.iml" group="app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/notification.iml" filepath="$PROJECT_DIR$/.idea/modules/notification.iml" group="notification" />
     </modules>
   </component>
 </project>

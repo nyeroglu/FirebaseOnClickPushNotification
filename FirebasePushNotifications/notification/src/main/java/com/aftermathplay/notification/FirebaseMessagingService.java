@@ -1,7 +1,7 @@
 package com.aftermathplay.notification;
 
-import android.app.ActivityManager;
-import android.app.IntentService;
+
+import android.R;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -9,8 +9,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
+
+
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -20,8 +20,8 @@ import com.google.firebase.messaging.RemoteMessage;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.List;
-import java.util.Map;
+
+
 
 /**
  * Created by User on 2/20/2017.
@@ -86,18 +86,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Intent intent;
 
 
-        if(click_action.equals("SOMEACTIVITY")){
-            intent = new Intent(this, SomeActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }
-        else if(click_action.equals("MAINACTIVITY")){
-            intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        }else{
             intent = new Intent(this, SendUnity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        }
 
         intent.putExtra("notification", notification);
 
@@ -107,7 +98,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.mipmap.app_logo)
+                .setSmallIcon(R.mipmap.sym_def_app_icon)
                 .setContentTitle(title)
                 .setContentText(messageBody)
                 .setAutoCancel(true)

@@ -16,7 +16,7 @@ android {
         }
 
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -37,7 +37,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.google.firebase:firebase-messaging:17.4.0'
-    compileOnly files('libs/unity-classes.jar')
+    compileOnly files('unity-classes.jar')
 }
 
 /*
